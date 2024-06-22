@@ -4,7 +4,9 @@ const { Model, Validator } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
 	class User extends Model {
 		static associate(models) {
-			// define association here
+			User.hasMany(models.Spot, {
+				foreignKey: 'ownerId',
+			});
 		}
 	}
 
@@ -24,11 +26,25 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			firstName: {
 				type: DataTypes.STRING,
-				allowNull: true,
+				allowNull: false,
+				validate: {
+					notNull: {
+						msg: 'Please enter your first name.',
+					},
+					isAlpha: true,
+					len: [0, 30],
+				},
 			},
 			lastName: {
 				type: DataTypes.STRING,
-				allowNull: true,
+				allowNull: false,
+				validate: {
+					notNull: {
+						msg: 'Please enter your last name.',
+					},
+					isAlpha: true,
+					len: [0, 30],
+				},
 			},
 			email: {
 				type: DataTypes.STRING,
@@ -52,11 +68,6 @@ module.exports = (sequelize, DataTypes) => {
 			defaultScope: {
 				attributes: {
 					exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
-				},
-			},
-			scopes: {
-				givingNames: {
-					include: ['firstName', 'lastName'],
 				},
 			},
 		}

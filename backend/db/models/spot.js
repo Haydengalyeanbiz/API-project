@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 				validate: {
 					isInt: true,
 				},
-				references: { model: User },
+				references: { model: 'Users' },
 			},
 			address: {
 				type: DataTypes.STRING(255),

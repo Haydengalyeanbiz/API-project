@@ -38,6 +38,16 @@ module.exports = (sequelize, DataTypes) => {
 					onDelete: 'CASCADE',
 				}
 			);
+			// has many for REVIEWS
+			Spot.hasMany(
+				models.Review,
+				{
+					foreignKey: 'spotId',
+				},
+				{
+					onDelete: 'CASCADE',
+				}
+			);
 		}
 	}
 	Spot.init(

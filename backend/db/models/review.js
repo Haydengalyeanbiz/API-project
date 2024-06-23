@@ -28,6 +28,16 @@ module.exports = (sequelize, DataTypes) => {
 					onDelete: 'CASCADE',
 				}
 			);
+			// has many for REVIEW-IMAGES
+			Review.hasMany(
+				models.Review,
+				{
+					foreignKey: 'reviewId',
+				},
+				{
+					onDelete: 'CASCADE',
+				}
+			);
 		}
 	}
 	Review.init(

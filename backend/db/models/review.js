@@ -8,17 +8,6 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
 		static associate(models) {
-			// belongs to for USERS
-			Review.belongsTo(
-				models.User,
-				{
-					foreignKey: 'userId',
-				},
-				{
-					onDelete: 'CASCADE',
-				}
-			);
-			// belongs to for SPOTS
 			Review.belongsTo(
 				models.Spot,
 				{
@@ -28,9 +17,17 @@ module.exports = (sequelize, DataTypes) => {
 					onDelete: 'CASCADE',
 				}
 			);
-			// has many for REVIEW-IMAGES
+			Review.belongsTo(
+				models.User,
+				{
+					foreignKey: 'userId',
+				},
+				{
+					onDelete: 'CASCADE',
+				}
+			);
 			Review.hasMany(
-				models.Review,
+				models.ReviewImage,
 				{
 					foreignKey: 'reviewId',
 				},
@@ -45,20 +42,20 @@ module.exports = (sequelize, DataTypes) => {
 			spotId: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
+				references: { model: 'Spots' },
+				onDelete: 'CASCADE',
 				validate: {
 					isInt: true,
 				},
-				references: { model: 'Spots' },
-				onDelete: 'CASCADE',
 			},
 			userId: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
+				references: { model: 'Users' },
+				onDelete: 'CASCADE',
 				validate: {
 					isInt: true,
 				},
-				references: { model: 'Users' },
-				onDelete: 'CASCADE',
 			},
 			review: {
 				type: DataTypes.STRING,
@@ -69,8 +66,6 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				validate: {
 					isInt: true,
-					min: 1,
-					max: 5,
 				},
 			},
 		},

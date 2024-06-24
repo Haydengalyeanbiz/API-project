@@ -229,4 +229,91 @@ router.post('/', requireAuth, async (req, res) => {
 	});
 });
 
+// Add an Image to a Spot based on the Spot's id
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+	const { spotId } = req.params.spotId;
+	const { url, preview } = req.body;
+	const spot = await Spot.findByPk(spotId);
+	if (!spot) {
+		return res.status(404).json({ message: "Spot couldn't be found" });
+	}
+	if (spot.owner !== req.user.id) {
+		return res.status(403).json({ message: 'Unauthorized' });
+	}
+	const newImage = await SpotImage.create({
+		spotId: spot.id,
+		url,
+		preview,
+	});
+	res.status(200).json({
+		id: newImage.id,
+		url: newImage.url,
+		preview: newImage.preview,
+	});
+});
+
+router.put('/:spotId', requireAuth, async (req, res) => {
+	const { spotId } = req.params;
+	const { address, city, state, country, lat, lng, name, description, price } =
+		req.body;
+	const spot = await Spot.findByPk(spotId);
+
+	if (!spot) {
+		return res.status(404).json({ message: "Spot couldn't be found" });
+	}
+	if (spot.ownerId !== req.user.id) {
+		return res.status(403).json({ message: 'Unauthorized' });
+	}
+	const errors = {};
+	if (!address) errors.address = 'Street address is required';
+	if (!city) errors.city = 'City is required';
+	if (!state) errors.state = 'State is required';
+	if (!country) errors.country = 'Country is required';
+	if (typeof lat !== 'number' || lat < -90 || lat > 90)
+		errors.lat = 'Latitude must be within -90 and 90';
+	if (typeof lng !== 'number' || lng < -180 || lng > 180)
+		errors.lng = 'Longitude must be within -180 and 180';
+	if (!name || name.length > 50)
+		errors.name = 'Name must be less than 50 characters';
+	if (!description) errors.description = 'Description is required';
+	if (typeof price !== 'number' || price <= 0)
+		errors.price = 'Price per day must be a positive number';
+	if (Object.keys(errors).length > 0) {
+		return res.status(400).json({
+			message: 'Bad Request',
+			errors,
+		});
+	}
+	await spot.update({
+		address,
+		city,
+		state,
+		country,
+		lat,
+		lng,
+		name,
+		description,
+		price,
+	});
+	res.status(200).json(spot);
+});
+
+router.delete('/:spotId', requireAuth, async (req, res) => {
+	const { spotId } = req.params.spotId;
+	const userId = req.user.id;
+	const spot = await Spot.findByPk(spotId);
+	if (!spot) {
+		return res.status(404).json({
+			message: "Spot couldn't be found",
+		});
+	}
+	if (spot.ownerId !== userId) {
+		return res.status(403).json({ message: 'Unauthorized' });
+	}
+	await spot.destroy();
+	res.status(200).json({
+		message: 'Successfully deleted',
+	});
+});
+
 module.exports = router;

@@ -13,23 +13,27 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: 'ownerId',
 				as: 'Owner',
 				onDelete: 'CASCADE',
+				hooks: true,
 			});
 			// has many for BOOKINGS
 			Spot.hasMany(models.Booking, {
 				foreignKey: 'spotId',
 				onDelete: 'CASCADE',
+				hooks: true,
 			});
 			// has many for SPOT-IMAGES
 			Spot.hasMany(models.SpotImage, {
 				foreignKey: 'spotId',
 				as: 'SpotImages',
 				onDelete: 'CASCADE',
+				hooks: true,
 			});
 			// has many for REVIEWS
 			Spot.hasMany(models.Review, {
 				foreignKey: 'spotId',
 				as: 'Reviews',
 				onDelete: 'CASCADE',
+				hooks: true,
 			});
 		}
 	}

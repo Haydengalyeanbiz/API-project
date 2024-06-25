@@ -13,8 +13,7 @@ const router = express.Router();
 
 // Get all Reviews by a Spot's Id
 router.get('/:spotId/reviews', async (req, res) => {
-	const { spotId } = req.params.spotId;
-	const spot = await Spot.findByPk(spotId);
+	const spot = await Spot.findByPk(req.params.spotId);
 	if (!spot) {
 		return res.status(404).json({
 			message: "Spot couldn't be found",
@@ -22,7 +21,7 @@ router.get('/:spotId/reviews', async (req, res) => {
 	}
 	const allSpotReviews = await Review.findAll({
 		where: {
-			spotId,
+			spotId: req.params.spotId,
 		},
 		include: [
 			{
@@ -180,6 +179,54 @@ router.get('/:spotId', async (req, res, next) => {
 	spotData.avgStarRating = parseFloat(spotData.avgStarRating).toFixed(1);
 
 	res.status(200).json(spotData);
+});
+
+// Create a Review for a Spot based on the Spot's id
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+	const spotId = req.params.spotId;
+	const userId = req.user.id;
+	const { review, stars } = req.body;
+	const spot = await Spot.findByPk(spotId);
+	if (!spot) {
+		return res.status(404).json({
+			message: "Spot couldn't be found",
+		});
+	}
+	const currReview = await Review.findOne({
+		where: {
+			spotId,
+			userId,
+		},
+	});
+	if (currReview) {
+		return res.status(500).json({
+			message: 'User already has a review for this spot',
+		});
+	}
+	if (!review || stars == null) {
+		return res.status(400).json({
+			message: 'Validation error',
+			errors: {
+				review: 'Review text is required',
+				stars: 'Stars must be an integer from 1 to 5',
+			},
+		});
+	}
+	if (stars < 1 || stars > 5 || !Number.isInteger(stars)) {
+		return res.status(400).json({
+			message: 'Validation error',
+			errors: {
+				stars: 'Stars must be an integer from 1 to 5',
+			},
+		});
+	}
+	const newReview = await Review.create({
+		userId,
+		spotId,
+		review,
+		stars,
+	});
+	res.status(201).json(newReview);
 });
 
 //Create a Spot

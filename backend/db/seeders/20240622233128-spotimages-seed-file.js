@@ -41,6 +41,16 @@ module.exports = {
 					url: 'https://example.com/image6.jpg',
 					preview: false,
 				},
+				{
+					spotId: 4,
+					url: 'https://example.com/image7.jpg',
+					preview: true,
+				},
+				{
+					spotId: 4,
+					url: 'https://example.com/image8.jpg',
+					preview: false,
+				},
 			],
 			{ validate: true }
 		);

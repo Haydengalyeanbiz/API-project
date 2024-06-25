@@ -54,12 +54,3 @@ router.get('/current', async (req, res) => {
 });
 
 module.exports = router;
-
-// router.get('/current', requireAuth, async (req, res) => {
-// 	const currentUser = req.user.id;
-// 	const reviews = Review.findAll({
-// 		where: {
-// 			userId: currentUser,
-// 		},
-// 	});
-// });

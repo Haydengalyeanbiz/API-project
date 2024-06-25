@@ -9,48 +9,28 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// belongs to for OWNERS/USERS
-			Spot.belongsTo(
-				models.User,
-				{
-					foreignKey: 'ownerId',
-					as: 'Owner',
-				},
-				{
-					onDelete: 'CASCADE',
-				}
-			);
+			Spot.belongsTo(models.User, {
+				foreignKey: 'ownerId',
+				as: 'Owner',
+				onDelete: 'CASCADE',
+			});
 			// has many for BOOKINGS
-			Spot.hasMany(
-				models.Booking,
-				{
-					foreignKey: 'spotId',
-				},
-				{
-					onDelete: 'CASCADE',
-				}
-			);
+			Spot.hasMany(models.Booking, {
+				foreignKey: 'spotId',
+				onDelete: 'CASCADE',
+			});
 			// has many for SPOT-IMAGES
-			Spot.hasMany(
-				models.SpotImage,
-				{
-					foreignKey: 'spotId',
-					as: 'SpotImages',
-				},
-				{
-					onDelete: 'CASCADE',
-				}
-			);
+			Spot.hasMany(models.SpotImage, {
+				foreignKey: 'spotId',
+				as: 'SpotImages',
+				onDelete: 'CASCADE',
+			});
 			// has many for REVIEWS
-			Spot.hasMany(
-				models.Review,
-				{
-					foreignKey: 'spotId',
-					as: 'Reviews',
-				},
-				{
-					onDelete: 'CASCADE',
-				}
-			);
+			Spot.hasMany(models.Review, {
+				foreignKey: 'spotId',
+				as: 'Reviews',
+				onDelete: 'CASCADE',
+			});
 		}
 	}
 	Spot.init(

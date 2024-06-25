@@ -5,36 +5,21 @@ module.exports = (sequelize, DataTypes) => {
 	class User extends Model {
 		static associate(models) {
 			// has many for SPOTS
-			User.hasMany(
-				models.Spot,
-				{
-					foreignKey: 'ownerId',
-					as: 'OwnedSpots',
-				},
-				{
-					onDelete: 'CASCADE',
-				}
-			);
+			User.hasMany(models.Spot, {
+				foreignKey: 'ownerId',
+				as: 'OwnedSpots',
+				onDelete: 'CASCADE',
+			});
 			// has many for BOOKINGS
-			User.hasMany(
-				models.Booking,
-				{
-					foreignKey: 'userId',
-				},
-				{
-					onDelete: 'CASCADE',
-				}
-			);
+			User.hasMany(models.Booking, {
+				foreignKey: 'userId',
+				onDelete: 'CASCADE',
+			});
 			// has many for REVIEWS
-			User.hasMany(
-				models.Review,
-				{
-					foreignKey: 'userId',
-				},
-				{
-					onDelete: 'CASCADE',
-				}
-			);
+			User.hasMany(models.Review, {
+				foreignKey: 'userId',
+				onDelete: 'CASCADE',
+			});
 		}
 	}
 

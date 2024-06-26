@@ -12,8 +12,14 @@ const { Op, Sequelize } = require('sequelize');
 const router = express.Router();
 
 // Get all Reviews of the current user
-router.get('/current', async (req, res) => {
+router.get('/current', requireAuth, async (req, res) => {
 	const userId = req.user.id;
+	const user = await User.findByPk(userId);
+	if (user.id !== userId) {
+		return res.status(403).json({
+			message: 'Unauthorized',
+		});
+	}
 	const reviews = await Review.findAll({
 		where: { userId },
 		include: [
@@ -135,6 +141,11 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 // Delete a Review
 router.delete('/:reviewId', requireAuth, async (req, res) => {
 	const reviewId = req.params.reviewId;
+	if (reviewId === 'null') {
+		return res.status(404).json({
+			message: 'Not found',
+		});
+	}
 	const findReview = await Review.findByPk(reviewId);
 	if (!findReview) {
 		return res.status(404).json({

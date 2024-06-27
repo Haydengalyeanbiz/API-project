@@ -11,6 +11,11 @@ const { requireAuth } = require('../../utils/auth');
 const { Op, Sequelize } = require('sequelize');
 const router = express.Router();
 
+const formatDate = (date) => {
+	const isoString = date.toISOString();
+	return isoString.substring(0, 19).replace('T', ' ');
+};
+
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res) => {
 	const userId = req.user.id;
@@ -61,17 +66,17 @@ router.get('/current', requireAuth, async (req, res) => {
 				city: spot.city,
 				state: spot.state,
 				country: spot.country,
-				lat: spot.lat,
-				lng: spot.lng,
+				lat: parseFloat(spot.lat),
+				lng: parseFloat(spot.lng),
 				name: spot.name,
 				price: spot.price,
 				previewImage,
 			},
 			userId: booking.userId,
-			startDate: booking.startDate,
-			endDate: booking.endDate,
-			createdAt: booking.createdAt,
-			updatedAt: booking.updatedAt,
+			startDate: formatDate(booking.startDate),
+			endDate: formatDate(booking.endDate),
+			createdAt: formatDate(booking.createdAt),
+			updatedAt: formatDate(booking.updatedAt),
 		};
 	});
 	res.status(200).json({ Bookings: response });
@@ -158,10 +163,10 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 		id: booking.id,
 		spotId: booking.spotId,
 		userId: booking.userId,
-		startDate: booking.startDate,
-		endDate: booking.endDate,
-		createdAt: booking.createdAt,
-		updatedAt: booking.updatedAt,
+		startDate: formatDate(booking.startDate),
+		endDate: formatDate(booking.endDate),
+		createdAt: formatDate(booking.createdAt),
+		updatedAt: formatDate(booking.updatedAt),
 	});
 });
 

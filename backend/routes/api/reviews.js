@@ -11,52 +11,97 @@ const { requireAuth } = require('../../utils/auth');
 const { Op, Sequelize } = require('sequelize');
 const router = express.Router();
 
-// Get all Reviews of the current user
-router.get('/current', requireAuth, async (req, res) => {
-	const userId = req.user.id;
-	const user = await User.findByPk(userId);
-	if (user.id !== userId) {
-		return res.status(403).json({
-			message: 'Unauthorized',
-		});
-	}
-	const reviews = await Review.findAll({
-		where: { userId },
-		include: [
-			{
-				model: User,
-				attributes: ['id', 'firstName', 'lastName'],
-			},
-			{
-				model: Spot,
-				attributes: [
-					'id',
-					'ownerId',
-					'address',
-					'city',
-					'state',
-					'country',
-					'lat',
-					'lng',
-					'name',
-					'price',
-				],
-				include: {
-					model: SpotImage,
-					as: 'SpotImages',
-					attributes: ['url'],
-					where: { preview: true },
-					required: false,
-				},
-			},
-			{
-				model: ReviewImage,
-				attributes: ['id', 'url'],
-			},
-		],
-	});
+const formatDate = (date) => {
+	const isoString = date.toISOString();
+	return isoString.substring(0, 19).replace('T', ' ');
+};
 
-	return res.status(200).json({ Reviews: reviews });
+// Get all Reviews of the current user
+router.get('/current', requireAuth, async (req, res, next) => {
+	try {
+		const userId = req.user.id;
+
+		const user = await User.findByPk(userId);
+		if (!user) {
+			return res.status(404).json({
+				message: 'User not found',
+			});
+		}
+
+		if (user.id !== userId) {
+			return res.status(403).json({
+				message: 'Unauthorized',
+			});
+		}
+
+		const reviews = await Review.findAll({
+			where: { userId },
+			include: [
+				{
+					model: User,
+					attributes: ['id', 'firstName', 'lastName'],
+				},
+				{
+					model: Spot,
+					attributes: [
+						'id',
+						'ownerId',
+						'address',
+						'city',
+						'state',
+						'country',
+						'lat',
+						'lng',
+						'name',
+						'price',
+						'createdAt',
+						'updatedAt',
+					],
+				},
+				{
+					model: ReviewImage,
+					attributes: ['id', 'url'],
+				},
+			],
+		});
+
+		const response = await Promise.all(
+			reviews.map(async (review) => {
+				const spot = await Spot.findByPk(review.Spot.id);
+				const spotImages = await SpotImage.findAll({
+					where: {
+						spotId: spot.id,
+						preview: true,
+					},
+					attributes: ['url'],
+				});
+
+				return {
+					id: review.id,
+					userId: review.userId,
+					spotId: review.spotId,
+					review: review.review,
+					stars: review.stars,
+					createdAt: formatDate(review.createdAt),
+					updatedAt: formatDate(review.updatedAt),
+					User: review.User,
+					Spot: {
+						...review.Spot.dataValues,
+						lat: parseFloat(review.Spot.lat),
+						lng: parseFloat(review.Spot.lng),
+						createdAt: formatDate(review.Spot.createdAt),
+						updatedAt: formatDate(review.Spot.updatedAt),
+						SpotImages: spotImages,
+					},
+					ReviewImages: review.ReviewImages,
+				};
+			})
+		);
+
+		res.status(200).json({ Reviews: response });
+	} catch (err) {
+		next(err);
+	}
 });
 
 // Add an Image to a Review based on the Review's id
@@ -134,8 +179,8 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 		spotId: existingReview.spotId,
 		review: existingReview.review,
 		stars: existingReview.stars,
-		createdAt: existingReview.createdAt,
-		updatedAt: existingReview.updatedAt,
+		createdAt: formatDate(existingReview.createdAt),
+		updatedAt: formatDate(existingReview.updatedAt),
 	});
 });
 // Delete a Review

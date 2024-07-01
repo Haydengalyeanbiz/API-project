@@ -703,6 +703,8 @@ router.post('/', requireAuth, async (req, res) => {
 		name: spot.name,
 		description: spot.description,
 		price: spot.price,
+		createdAt: formatDate(spot.createdAt),
+		updatedAt: formatDate(spot.updatedAt),
 	});
 });
 

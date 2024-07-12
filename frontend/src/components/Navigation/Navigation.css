@@ -1,0 +1,7 @@
+@import url('../../index.css');
+
+.nav-list {
+	display: flex;
+	list-style: none;
+	gap: 1rem;
+}

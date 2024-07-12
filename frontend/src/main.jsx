@@ -4,10 +4,14 @@ import App from './App';
 import './index.css';
 import { Provider } from 'react-redux';
 import configureStore from './store/store.js';
+import { restoreCSRF, csrfFetch } from './store/csrf'; // Import restoreCSRF and csrfFetch
 
 const store = configureStore();
 
-if (process.env.NODE_ENV !== 'production') {
+if (import.meta.env.MODE !== 'production') {
+	restoreCSRF(); // Call restoreCSRF to set the XSRF-TOKEN cookie
+
+	window.csrfFetch = csrfFetch;
 	window.store = store;
 }
 

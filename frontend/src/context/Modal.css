@@ -36,3 +36,8 @@
 #modal-content:hover {
 	border-color: var(--lightSpaceAccent-clr);
 }
+
+#modal-content label {
+	display: flex;
+	justify-content: space-between;
+}

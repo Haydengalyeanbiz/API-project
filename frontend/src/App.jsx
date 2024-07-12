@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import * as sessionActions from './store/session';
-import '../src/components/SignupFormModal/SignupFromModal';
 
 function Layout() {
 	const dispatch = useDispatch();

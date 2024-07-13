@@ -13,6 +13,13 @@
 	gap: 1rem;
 	padding: 1rem 2rem;
 	z-index: 1000;
+	cursor: pointer;
+	transition: all 0.5s ease-in-out;
+}
+
+.profile-dropdown:hover {
+	background-color: var(--lightSpaceAccent-clr);
+	color: var(--white-clr);
 }
 
 .profile-dropdown.hidden {

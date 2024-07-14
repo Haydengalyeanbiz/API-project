@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import Navigation from './components/Navigation/Navigation';
 import * as sessionActions from './store/session';
+// CONTEXT FILES
 import { Modal } from './context/Modal';
+
+// COMPONENT FILES
+import Navigation from './components/Navigation/Navigation';
+import { Spots } from './components/Spots/Spots';
 
 function Layout() {
 	const dispatch = useDispatch();
@@ -30,7 +34,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <h1>MOTHER EARTH</h1>,
+				element: <Spots />,
 			},
 		],
 	},

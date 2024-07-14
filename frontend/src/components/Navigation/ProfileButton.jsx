@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { FaUserCircle } from 'react-icons/fa';
+import { GiAstronautHelmet } from 'react-icons/gi';
+import { RxHamburgerMenu } from 'react-icons/rx';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
@@ -43,8 +44,12 @@ function ProfileButton({ user }) {
 
 	return (
 		<>
-			<button onClick={toggleMenu}>
-				<FaUserCircle />
+			<button
+				className='profile-btn'
+				onClick={toggleMenu}
+			>
+				<RxHamburgerMenu />
+				<GiAstronautHelmet />
 			</button>
 			<ul
 				className={ulClassName}

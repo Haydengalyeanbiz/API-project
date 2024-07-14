@@ -1,7 +1,15 @@
 @import url('../../index.css');
 
-.nav-list {
+.navigation-ul {
+	list-style-type: none;
 	display: flex;
-	list-style: none;
-	gap: 1rem;
+	justify-content: space-between;
+	padding: 1rem 2rem;
+}
+
+.navigation-logo {
+	color: var(--deepSpaceAccent-clr);
+	font-family: var(--ff-headers);
+	font-size: var(--fs-medium);
+	text-decoration: none;
 }

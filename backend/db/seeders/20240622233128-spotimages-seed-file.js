@@ -13,43 +13,103 @@ module.exports = {
 			[
 				{
 					spotId: 1,
-					url: 'https://example.com/image1.jpg',
-					preview: true,
-				},
-				{
-					spotId: 1,
-					url: 'https://example.com/image2.jpg',
-					preview: false,
-				},
-				{
-					spotId: 2,
-					url: 'https://example.com/image3.jpg',
+					url: '/images/mars/mars1.jpg',
 					preview: true,
 				},
 				{
 					spotId: 2,
-					url: 'https://example.com/image4.jpg',
-					preview: false,
-				},
-				{
-					spotId: 3,
-					url: 'https://example.com/image5.jpg',
+					url: '/images/moon/moon2.jpg',
 					preview: true,
 				},
 				{
 					spotId: 3,
-					url: 'https://example.com/image6.jpg',
-					preview: false,
-				},
-				{
-					spotId: 4,
-					url: 'https://example.com/image7.jpg',
+					url: '/images/moon/moon3.jpg',
 					preview: true,
 				},
 				{
 					spotId: 4,
-					url: 'https://example.com/image8.jpg',
-					preview: false,
+					url: '/images/saturn/saturn1.jpg',
+					preview: true,
+				},
+				{
+					spotId: 5,
+					url: '/images/moon/moonroom1.jpg',
+					preview: true,
+				},
+				{
+					spotId: 6,
+					url: '/images/saturn/saturn2.jpg',
+					preview: true,
+				},
+				{
+					spotId: 7,
+					url: '/images/moon/moonroom2.jpg',
+					preview: true,
+				},
+				{
+					spotId: 8,
+					url: '/images/saturn/saturn3.jpg',
+					preview: true,
+				},
+				{
+					spotId: 9,
+					url: '/images/moon/moonroom3.jpg',
+					preview: true,
+				},
+				{
+					spotId: 10,
+					url: '/images/saturn/saturn4.jpg',
+					preview: true,
+				},
+				{
+					spotId: 11,
+					url: '/images/moon/moon4.jpg',
+					preview: true,
+				},
+				{
+					spotId: 12,
+					url: '/images/mars/marsroom3.jpg',
+					preview: true,
+				},
+				{
+					spotId: 13,
+					url: '/images/mars/mars3.jpg',
+					preview: true,
+				},
+				{
+					spotId: 14,
+					url: '/images/saturn/saturn5.jpg',
+					preview: true,
+				},
+				{
+					spotId: 15,
+					url: '/images/mars/marsroom3.jpg',
+					preview: true,
+				},
+				{
+					spotId: 16,
+					url: '/images/mars/mars6.jpg',
+					preview: true,
+				},
+				{
+					spotId: 17,
+					url: '/images/mars/mars6.jpg',
+					preview: true,
+				},
+				{
+					spotId: 18,
+					url: '/images/mars/mars5.jpg',
+					preview: true,
+				},
+				{
+					spotId: 19,
+					url: '/images/moon/moon3.jpg',
+					preview: true,
+				},
+				{
+					spotId: 20,
+					url: '/images/moon/moonroom5.jpg',
+					preview: true,
 				},
 			],
 			{ validate: true }

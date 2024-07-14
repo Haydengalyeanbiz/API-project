@@ -1,0 +1,25 @@
+@import url('../../index.css');
+
+.spots-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	gap: 1.5rem;
+}
+
+.spot-div-structure {
+	width: 300px;
+	border: 1px solid var(--deepSpaceAccent-clr);
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+.spot-div-structure:hover {
+	box-shadow: 3px 5px 15px var(--deepSpaceAccent-clr);
+}
+
+.spot-image {
+	width: 300px;
+	border-top-left-radius: 14px;
+	border-top-right-radius: 14px;
+}

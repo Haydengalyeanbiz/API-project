@@ -47,7 +47,12 @@ function LoginFormModal() {
 					/>
 				</label>
 				{errors.credential && <p>{errors.credential}</p>}
-				<button type='submit'>Log In</button>
+				<button
+					type='submit'
+					disabled={Object.values(errors).length > 0}
+				>
+					Log In
+				</button>
 			</form>
 		</>
 	);

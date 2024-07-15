@@ -16,4 +16,7 @@ export default defineConfig(({ mode }) => ({
 			'/api': 'http://localhost:8000',
 		},
 	},
+	alias: {
+		'react-tooltip': 'react-tooltip/dist/react-tooltip.esm.js',
+	},
 }));

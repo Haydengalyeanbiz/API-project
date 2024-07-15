@@ -7,8 +7,10 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import '../Navigation/ProfileButton.css';
+import { useNavigate } from 'react-router-dom';
 
 function ProfileButton({ user }) {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
 	const ulRef = useRef();
@@ -38,6 +40,7 @@ function ProfileButton({ user }) {
 		e.preventDefault();
 		dispatch(sessionActions.logout());
 		closeMenu();
+		navigate('/');
 	};
 
 	const ulClassName = 'profile-dropdown' + (showMenu ? '' : ' hidden');
@@ -63,7 +66,12 @@ function ProfileButton({ user }) {
 						</li>
 						<li>{user.email}</li>
 						<li>
-							<button onClick={logout}>Log Out</button>
+							<button
+								className='logout-btn'
+								onClick={logout}
+							>
+								Log Out
+							</button>
 						</li>
 					</>
 				) : (

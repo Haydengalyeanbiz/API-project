@@ -3,6 +3,7 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { IoIosPlanet } from 'react-icons/io';
+import { IconContext } from 'react-icons/lib';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
@@ -10,24 +11,26 @@ function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
 
 	return (
-		<div className='navigation-div'>
-			<ul className='navigation-ul'>
-				<li>
-					<NavLink
-						to='/'
-						className='navigation-logo'
-					>
-						<IoIosPlanet />
-						Planetbnb
-					</NavLink>
-				</li>
-				{isLoaded && (
+		<IconContext.Provider value={{ className: 'react-icons' }}>
+			<div className='navigation-div'>
+				<ul className='navigation-ul'>
 					<li>
-						<ProfileButton user={sessionUser} />
+						<NavLink
+							to='/'
+							className='navigation-logo'
+						>
+							<IoIosPlanet />
+							Planetbnb
+						</NavLink>
 					</li>
-				)}
-			</ul>
-		</div>
+					{isLoaded && (
+						<li>
+							<ProfileButton user={sessionUser} />
+						</li>
+					)}
+				</ul>
+			</div>
+		</IconContext.Provider>
 	);
 }
 

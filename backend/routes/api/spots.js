@@ -392,7 +392,7 @@ router.get('/', async (req, res) => {
 			previewImage: spotImagesMap[spot.id] || null,
 		}));
 
-		res.status(200).json({ Spots: response, page, size });
+		res.status(200).json({ allSpots: response, page, size });
 	} catch (err) {
 		console.error(err);
 		res.status(500).json({ message: 'Server error', error: err.message });

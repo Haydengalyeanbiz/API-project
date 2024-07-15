@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import './SpotImages.css';
 
 export const SpotImages = ({ spotId }) => {
-	const spot = useSelector((state) => state.spots[spotId]);
+	const spot = useSelector((state) => state.spots.spotDetails[spotId]);
 
 	if (!spot || !spot.SpotImages) {
 		return <div>Loading images...</div>;

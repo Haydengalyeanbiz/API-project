@@ -1,14 +1,14 @@
 @import url('../../index.css');
 
-.form-wrapper {
-	height: 100%;
+.login-wrapper {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
+	gap: 1rem;
 }
 
-form {
+.login-form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -21,17 +21,39 @@ label {
 	gap: 2rem;
 }
 
-.login-button {
-	font-family: var(--ff-primary);
-	font-size: 20px;
-	padding: 1rem;
-	border: none;
-	background-color: var(--lightSpaceAccent-clr);
-	transition: all 0.4s ease-in-out;
-	border-radius: 12px;
+input {
+	border-color: var(--deepSpaceAccent-clr);
+	color: var(--deepSpaceAccent-clr);
+	transition: all 0.2s;
 }
 
-.login-button:hover {
+input:hover {
+	box-shadow: 2px 2px 10px var(--deepSpaceAccent-clr),
+		-2px -2px 10px var(--deepSpaceAccent-clr);
+}
+
+.login-btn {
+	padding: 0.5rem 1rem;
+	border: solid 2px var(--deepSpaceAccent-clr);
+	border-radius: 14px;
 	background-color: var(--deepSpaceAccent-clr);
 	color: var(--white-clr);
+	font-family: var(--ff-headers);
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.login-btn:hover {
+	background-color: var(--white-clr);
+	color: var(--deepSpaceAccent-clr);
+	box-shadow: 2px 2px 10px var(--deepSpaceAccent-clr),
+		-2px -2px 10px var(--deepSpaceAccent-clr);
+}
+
+.login-btn:disabled {
+	background-color: #cccccc; /* Light gray background */
+	color: #666666; /* Dark gray text */
+	border: solid 2px #cccccc; /* Match border to background */
+	cursor: not-allowed;
+	box-shadow: none;
 }

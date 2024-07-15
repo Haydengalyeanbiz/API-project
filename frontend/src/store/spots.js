@@ -1,3 +1,5 @@
+import { csrfFetch } from './csrf';
+
 //constant actions
 const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS';
 const GET_SPOT_DETAILS = 'spots/GET_SPOT_DETAILS';
@@ -18,7 +20,7 @@ export const getSpot = (spot) => ({
 // THUNK ACTIONS
 // GET ALL SPOTS
 export const getAllSpots = () => async (dispatch) => {
-	const response = await fetch('/api/spots');
+	const response = await csrfFetch('/api/spots');
 	if (response.ok) {
 		const spots = await response.json();
 		dispatch(getSpots(spots));
@@ -27,7 +29,7 @@ export const getAllSpots = () => async (dispatch) => {
 };
 // GET A SPOTS DETAILS
 export const getSpotDetails = (spotId) => async (dispatch) => {
-	const response = await fetch(`/api/spots/${spotId}`);
+	const response = await csrfFetch(`/api/spots/${spotId}`);
 	if (response.ok) {
 		const spot = await response.json();
 		dispatch(getSpot(spot));
@@ -35,17 +37,24 @@ export const getSpotDetails = (spotId) => async (dispatch) => {
 	}
 };
 
-const initialState = { spots: null };
+const initialState = { allSpots: {}, spotDetails: {} };
 
 const spotsReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_ALL_SPOTS: {
-			return { ...state, spots: action.payload.allSpots };
+			const newState = { ...state, allSpots: {} };
+			action.payload.allSpots.forEach((spot) => {
+				newState.allSpots[spot.id] = spot;
+			});
+			return newState;
 		}
 		case GET_SPOT_DETAILS: {
 			return {
 				...state,
-				[action.payload.id]: action.payload,
+				spotDetails: {
+					...state.spotDetails,
+					[action.payload.id]: action.payload,
+				},
 			};
 		}
 		default:

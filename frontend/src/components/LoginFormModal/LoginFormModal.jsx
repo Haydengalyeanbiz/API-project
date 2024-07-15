@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
@@ -9,10 +9,23 @@ function LoginFormModal() {
 	const [credential, setCredential] = useState('');
 	const [password, setPassword] = useState('');
 	const [errors, setErrors] = useState({});
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { closeModal } = useModal();
+
+	useEffect(() => {
+		const disable = {};
+		if (credential.length < 4) {
+			disable.credential = 'Username must be longer than 4 characters';
+		}
+		if (password.length < 6) {
+			disable.password = 'Password must be longer than 6 characters';
+		}
+		setErrors(disable);
+	}, [credential, password]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setIsSubmitting(true);
 		setErrors({});
 		return dispatch(sessionActions.login({ credential, password }))
 			.then(closeModal)
@@ -20,14 +33,19 @@ function LoginFormModal() {
 				const data = await res.json();
 				if (data && data.errors) {
 					setErrors(data.errors);
+				} else {
+					setErrors({ credential: 'The provided credentials were invalid.' });
 				}
 			});
 	};
 
 	return (
-		<>
+		<div className='login-wrapper'>
 			<h1>Log In</h1>
-			<form onSubmit={handleSubmit}>
+			<form
+				className='login-form'
+				onSubmit={handleSubmit}
+			>
 				<label>
 					Username
 					<input
@@ -37,6 +55,9 @@ function LoginFormModal() {
 						required
 					/>
 				</label>
+				{errors.credential && isSubmitting && (
+					<p className='error-message'>{errors.credential}</p>
+				)}
 				<label>
 					Password
 					<input
@@ -46,15 +67,18 @@ function LoginFormModal() {
 						required
 					/>
 				</label>
-				{errors.credential && <p>{errors.credential}</p>}
+				{errors.password && isSubmitting && (
+					<p className='error-message'>{errors.password}</p>
+				)}
 				<button
+					className='login-btn'
 					type='submit'
-					disabled={Object.values(errors).length > 0}
+					disabled={Object.values(errors).length > 0 || isSubmitting}
 				>
 					Log In
 				</button>
 			</form>
-		</>
+		</div>
 	);
 }
 

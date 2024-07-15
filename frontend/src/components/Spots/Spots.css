@@ -8,6 +8,7 @@
 }
 
 .spot-div-structure {
+	position: relative;
 	width: 300px;
 	cursor: pointer;
 }
@@ -32,13 +33,10 @@
 	font-weight: bold;
 }
 
-.tooltip {
+#tooltip {
 	position: absolute;
-	bottom: 100%;
-	transform: translateX(-50%);
-	background-color: rgba(0, 0, 0, 0.7);
-	color: white;
-	border-radius: 5px;
+	font-family: var(--ff-headers);
+	color: var(--white-clr);
 	z-index: 100;
-	/* visibility: hidden; */
+	left: 10px;
 }

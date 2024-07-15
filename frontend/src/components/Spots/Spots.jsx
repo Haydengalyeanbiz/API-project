@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getAllSpots } from '../../store/spots';
-import { Tooltip } from 'react-tooltip';
 import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './Spots.css';
@@ -9,7 +8,8 @@ import './Spots.css';
 export const Spots = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const spots = useSelector((state) => state.spots.spots);
+	const spots = useSelector((state) => state.spots.allSpots);
+	const [toolTip, setToolTip] = useState(null);
 
 	useEffect(() => {
 		dispatch(getAllSpots());
@@ -22,14 +22,16 @@ export const Spots = () => {
 	return (
 		<div className='spots-wrapper'>
 			{spots &&
-				spots.map((spot) => (
+				Object.values(spots).map((spot) => (
 					<div
-						data-tip={spot.name}
+						value={toolTip}
+						onMouseOut={() => setToolTip(null)}
+						onMouseOver={() => setToolTip(spot.id)}
 						className='spot-div-structure'
 						key={spot.id}
 						onClick={() => handleSpotClick(spot.id)}
 					>
-						<div className='tooltip'>{spot.name}</div>
+						{toolTip === spot.id && <div id='tooltip'>{spot.name}</div>}
 						<img
 							className='spot-image'
 							src={spot.previewImage}
@@ -47,7 +49,6 @@ export const Spots = () => {
 						<p className='spot-price'>{`$${spot.price}`} night</p>
 					</div>
 				))}
-			<Tooltip />
 		</div>
 	);
 };

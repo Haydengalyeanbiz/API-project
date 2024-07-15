@@ -1,5 +1,41 @@
 @import url('../../index.css');
 
-form {
+.signup-wrapper {
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+.signup-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.signup-btn {
+	padding: 0.5rem 1rem;
+	border: solid 2px var(--deepSpaceAccent-clr);
+	border-radius: 14px;
+	background-color: var(--deepSpaceAccent-clr);
+	color: var(--white-clr);
+	font-family: var(--ff-headers);
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.signup-btn:hover {
+	background-color: var(--white-clr);
+	color: var(--deepSpaceAccent-clr);
+	box-shadow: 2px 2px 10px var(--deepSpaceAccent-clr),
+		-2px -2px 10px var(--deepSpaceAccent-clr);
+}
+
+.signup-btn:disabled {
+	background-color: #cccccc; /* Light gray background */
+	color: #666666; /* Dark gray text */
+	border: solid 2px #cccccc; /* Match border to background */
+	cursor: not-allowed;
+	box-shadow: none; /* Remove box-shadow */
 }

@@ -9,6 +9,7 @@ import { Modal } from './context/Modal';
 import Navigation from './components/Navigation/Navigation';
 import { Spots } from './components/Spots/Spots';
 import { SpotDetails } from './components/SpotDetails/SpotDetails';
+import { CreateSpot } from './components/CreateSpot/CreateSpot';
 
 function Layout() {
 	const dispatch = useDispatch();
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
 			{
 				path: '/spots/:spotId', // Add this route for spot details
 				element: <SpotDetails />,
+			},
+			{
+				path: '/spots/new', // Add this route for spot details
+				element: <CreateSpot />,
 			},
 		],
 	},

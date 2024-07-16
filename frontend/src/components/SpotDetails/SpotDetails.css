@@ -48,6 +48,7 @@
 	box-shadow: 4px 2px 10px var(--lightSpaceAccent-clr);
 	transition: all 0.3s ease-in-out;
 	cursor: pointer;
+	border-radius: 14px;
 }
 
 .book-btn:hover {
@@ -64,6 +65,12 @@
 }
 
 /* REVIEW CSS */
+
+.review-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
 
 .review-title {
 	font-size: var(--fs-medium);

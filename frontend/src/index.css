@@ -22,22 +22,26 @@ h1 {
 	margin: 0;
 	font-family: var(--ff-headers);
 	font-size: var(--fs-x_large);
+	color: var(--deepSpaceAccent-clr);
 }
 
 h2 {
 	margin: 0;
 	font-family: var(--ff-headers);
 	font-size: var(--fs-large);
+	color: var(--deepSpaceAccent-clr);
 }
 
 h3 {
 	margin: 0;
 	font-family: var(--ff-headers);
 	font-size: var(--fs-medium);
+	color: var(--deepSpaceAccent-clr);
 }
 
 p {
 	margin: 0;
 	font-family: var(--ff-primary);
 	font-size: var(--fs-small);
+	color: var(--deepSpaceAccent-clr);
 }

@@ -18,6 +18,10 @@
 	justify-content: space-between;
 }
 
+.spot-city-state {
+	font-weight: 300;
+}
+
 .spot-rating {
 	display: flex;
 	gap: 0.5rem;
@@ -29,6 +33,10 @@
 	transition: all 0.3s ease-in-out;
 }
 
+.spot-price {
+	font-weight: 500;
+}
+
 .spot-name {
 	font-weight: bold;
 }
@@ -38,5 +46,7 @@
 	font-family: var(--ff-headers);
 	color: var(--white-clr);
 	z-index: 100;
+	top: 10px;
 	left: 10px;
+	transition: all 0.3s ease-in-out;
 }

@@ -1,0 +1,49 @@
+@import url('../../index.css');
+
+.create-spot-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.create-spot-form {
+	display: flex;
+	flex-direction: column;
+	max-width: 50dvw;
+	gap: 2rem;
+}
+
+.create-spot-heading {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.create-spot-form input {
+	width: 100%;
+}
+
+.form-div-structure {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.form-headers {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.form-city-state {
+	display: flex;
+	gap: 1rem;
+}
+
+textarea {
+	border: solid 2px var(--deepSpaceAccent-clr);
+	min-width: 50dvw;
+	max-width: 50dvw;
+	min-height: 100px;
+	max-height: 100px;
+}

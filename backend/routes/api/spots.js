@@ -240,22 +240,21 @@ router.get('/:spotId', async (req, res, next) => {
 // Get all spots with query filters
 router.get('/', async (req, res) => {
 	try {
-		let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
-			req.query;
+		let { minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
-		// Default values for pagination
-		page = parseInt(page) || 1;
-		size = parseInt(size) || 20;
+		// // Default values for pagination
+		// page = parseInt(page) || 1;
+		// size = parseInt(size) || 20;
 
 		const errors = {};
 
-		// Validate pagination parameters
-		if (page < 1 || page > 10) {
-			errors.page = 'Page must be between 1 and 10';
-		}
-		if (size < 1 || size > 20) {
-			errors.size = 'Size must be between 1 and 20';
-		}
+		// // Validate pagination parameters
+		// if (page < 1 || page > 10) {
+		// 	errors.page = 'Page must be between 1 and 10';
+		// }
+		// if (size < 1 || size > 20) {
+		// 	errors.size = 'Size must be between 1 and 20';
+		// }
 
 		// Validate and set latitude and longitude filters
 		if (minLat !== undefined) {
@@ -340,8 +339,8 @@ router.get('/', async (req, res) => {
 				'createdAt',
 				'updatedAt',
 			],
-			limit: size,
-			offset: (page - 1) * size,
+			// limit: size,
+			// offset: (page - 1) * size,
 		});
 
 		// Fetch related data in a lazy load manner
@@ -392,7 +391,7 @@ router.get('/', async (req, res) => {
 			previewImage: spotImagesMap[spot.id] || null,
 		}));
 
-		res.status(200).json({ allSpots: response, page, size });
+		res.status(200).json({ allSpots: response });
 	} catch (err) {
 		console.error(err);
 		res.status(500).json({ message: 'Server error', error: err.message });

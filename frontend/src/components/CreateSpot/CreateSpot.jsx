@@ -90,13 +90,7 @@ export const CreateSpot = () => {
 						reservation
 					</p>
 				</div>
-				{hasSubmitted && Object.keys(errors).length > 0 && (
-					<div className='error-messages'>
-						{Object.values(errors).map((error, idx) => (
-							<p key={idx}>{error}</p>
-						))}
-					</div>
-				)}
+
 				<div className='form-info form-div-structure'>
 					<label htmlFor='country'>Country</label>
 					<input
@@ -137,6 +131,7 @@ export const CreateSpot = () => {
 								<p className='error'>{errors.city}</p>
 							)}
 						</div>
+
 						<div className='state-div'>
 							<label htmlFor='state'>State</label>
 							<input

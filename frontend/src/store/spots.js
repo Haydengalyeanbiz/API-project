@@ -33,6 +33,7 @@ export const getAllSpots = () => async (dispatch) => {
 	const response = await csrfFetch('/api/spots');
 	if (response.ok) {
 		const spots = await response.json();
+		console.log('THIS IS THE RESPONSE ====>', spots);
 		dispatch(getSpots(spots));
 		return spots;
 	}
@@ -58,6 +59,7 @@ export const addANewSpot = (spot) => async (dispatch) => {
 	});
 	if (response.ok) {
 		const newSpot = await response.json();
+		console.log('THIS IS MY RESPONSE FOR ADDING A SPOT ===> ', newSpot);
 		dispatch(addSpot(newSpot));
 		return newSpot;
 	} else {
@@ -72,7 +74,8 @@ const spotsReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_ALL_SPOTS: {
 			const newState = { ...state, allSpots: {} };
-			action.payload.allSpots.forEach((spot) => {
+			const spotsArray = action.payload.allSpots;
+			spotsArray.forEach((spot) => {
 				newState.allSpots[spot.id] = spot;
 			});
 			return newState;

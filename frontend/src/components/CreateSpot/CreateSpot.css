@@ -101,3 +101,7 @@ textarea:hover {
 		-2px -2px 10px var(--deepSpaceAccent-clr);
 	background-color: var(--white-clr);
 }
+
+.error {
+	color: red;
+}

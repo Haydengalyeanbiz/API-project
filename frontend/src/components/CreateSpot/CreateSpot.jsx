@@ -23,7 +23,6 @@ export const CreateSpot = () => {
 		image5: '',
 	});
 	const [errors, setErrors] = useState({});
-	const [formIsValid, setFormIsValid] = useState(false);
 	const [hasSubmitted, setHasSubmitted] = useState(false);
 
 	const handleChange = (e) => {
@@ -43,14 +42,16 @@ export const CreateSpot = () => {
 		if (!formData.image1) newErrors.image1 = 'Preview Image URL is required';
 
 		setErrors(newErrors);
-
-		const isValid = Object.keys(newErrors).length === 0;
-		setFormIsValid(isValid);
 	}, [formData]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setHasSubmitted(true);
+
+		if (Object.keys(errors).length > 0) {
+			return;
+		}
+
 		const spot = {
 			country: formData.country,
 			address: formData.address,
@@ -125,6 +126,7 @@ export const CreateSpot = () => {
 						<div className='city-div'>
 							<label htmlFor='city'>City</label>
 							<input
+								className='city-input'
 								id='city'
 								placeholder='City'
 								type='text'
@@ -277,10 +279,10 @@ export const CreateSpot = () => {
 
 				<div className='line-break'></div>
 				<button
+					className='create-spot-btn-form'
 					type='submit'
-					disabled={!formIsValid}
 				>
-					Submit
+					Create Spot
 				</button>
 			</form>
 		</div>

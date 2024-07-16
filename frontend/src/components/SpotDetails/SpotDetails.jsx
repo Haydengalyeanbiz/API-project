@@ -46,7 +46,7 @@ export const SpotDetails = () => {
 			<div className='spot-details-info'>
 				<div className='spot-owner-description'>
 					<p className='spot-owner'>
-						{`Hosted by ${spot.Owner.firstName} ${spot.Owner.lastName}`}
+						{`Hosted by ${spot.Owner?.firstName} ${spot.Owner?.lastName}`}
 					</p>
 					<p className='spot-description'>{spot.description}</p>
 				</div>

@@ -1,9 +1,9 @@
 @import url('../../index.css');
 
 .spots-wrapper {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	padding: 0 1rem 0 1.2rem;
 	gap: 1.5rem;
 }
 

@@ -443,7 +443,19 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
 		review,
 		stars,
 	});
-	res.status(201).json(newReview);
+
+	// Fetch the user who created the review
+	const user = await User.findByPk(userId, {
+		attributes: ['id', 'firstName', 'lastName'],
+	});
+
+	// Add the user to the review object
+	const reviewWithUser = {
+		...newReview.toJSON(),
+		User: user,
+	};
+
+	res.status(201).json(reviewWithUser);
 });
 
 // Create a Booking from a Spot based on the Spot's id
@@ -543,8 +555,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
 //Edit a spot
 router.put('/:spotId', requireAuth, async (req, res) => {
-	const { address, city, state, country, lat, lng, name, description, price } =
-		req.body;
+	const { address, city, state, country, name, description, price } = req.body;
 	const spot = await Spot.findByPk(req.params.spotId);
 
 	if (!spot) {
@@ -558,10 +569,6 @@ router.put('/:spotId', requireAuth, async (req, res) => {
 	if (!city) errors.city = 'City is required';
 	if (!state) errors.state = 'State is required';
 	if (!country) errors.country = 'Country is required';
-	if (typeof lat !== 'number' || lat < -90 || lat > 90)
-		errors.lat = 'Latitude must be within -90 and 90';
-	if (typeof lng !== 'number' || lng < -180 || lng > 180)
-		errors.lng = 'Longitude must be within -180 and 180';
 	if (!name || name.length > 50)
 		errors.name = 'Name must be less than 50 characters';
 	if (!description) errors.description = 'Description is required';
@@ -578,8 +585,6 @@ router.put('/:spotId', requireAuth, async (req, res) => {
 		city,
 		state,
 		country,
-		lat,
-		lng,
 		name,
 		description,
 		price,
@@ -592,8 +597,6 @@ router.put('/:spotId', requireAuth, async (req, res) => {
 		city: spot.city,
 		state: spot.state,
 		country: spot.country,
-		lat: parseFloat(spot.lat),
-		lng: parseFloat(spot.lng),
 		name: spot.name,
 		description: spot.description,
 		price: spot.price,

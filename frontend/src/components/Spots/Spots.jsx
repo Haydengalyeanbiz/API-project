@@ -19,10 +19,13 @@ export const Spots = () => {
 		navigate(`/spots/${spotId}`);
 	};
 
+	const spotsArray = Object.values(spots);
+
 	return (
 		<div className='spots-wrapper'>
-			{spots &&
-				Object.values(spots).map((spot) => (
+			{spotsArray
+				.sort((a, b) => b.id - a.id)
+				.map((spot) => (
 					<div
 						value={toolTip}
 						onMouseOut={() => setToolTip(null)}

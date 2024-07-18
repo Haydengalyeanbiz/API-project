@@ -39,6 +39,15 @@ function LoginFormModal() {
 			});
 	};
 
+	const handleSubmitDemo = (e) => {
+		e.preventDefault();
+		setIsSubmitting(true);
+		setErrors({});
+		return dispatch(
+			sessionActions.login({ credential: 'Demo-lition', password: 'password' })
+		).then(closeModal);
+	};
+
 	return (
 		<div className='login-wrapper'>
 			<h1>Log In</h1>
@@ -73,9 +82,15 @@ function LoginFormModal() {
 				<button
 					className='login-btn'
 					type='submit'
-					disabled={Object.values(errors).length > 0 || isSubmitting}
+					disabled={Object.values(errors).length > 0}
 				>
 					Log In
+				</button>
+				<button
+					className='login-btn'
+					onClick={handleSubmitDemo}
+				>
+					Login as Demo User
 				</button>
 			</form>
 		</div>

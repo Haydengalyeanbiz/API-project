@@ -60,11 +60,19 @@ function ProfileButton({ user }) {
 			>
 				{user ? (
 					<>
-						<li>{user.username}</li>
-						<li>
-							{user.firstName} {user.lastName}
-						</li>
+						<li>Hello, {user.firstName}</li>
+
 						<li>{user.email}</li>
+						<div className='line-break'></div>
+						<li>
+							<button
+								className='logout-btn'
+								onClick={() => navigate('/spots/current')}
+							>
+								Manage Spots
+							</button>
+						</li>
+						<div className='line-break'></div>
 						<li>
 							<button
 								className='logout-btn'
@@ -77,14 +85,15 @@ function ProfileButton({ user }) {
 				) : (
 					<>
 						<OpenModalMenuItem
-							itemText='Log In'
-							onItemClick={closeMenu}
-							modalComponent={<LoginFormModal />}
-						/>
-						<OpenModalMenuItem
 							itemText='Sign Up'
 							onItemClick={closeMenu}
 							modalComponent={<SignupFormModal />}
+						/>
+						<div className='line-break'></div>
+						<OpenModalMenuItem
+							itemText='Log In'
+							onItemClick={closeMenu}
+							modalComponent={<LoginFormModal />}
 						/>
 					</>
 				)}

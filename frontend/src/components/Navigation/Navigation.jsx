@@ -19,12 +19,12 @@ function Navigation({ isLoaded }) {
 		<IconContext.Provider value={{ className: 'react-icons' }}>
 			<div className='navigation-div'>
 				<ul className='navigation-ul'>
-					<li>
+					<li className='nav-logo'>
 						<NavLink
 							to='/'
 							className='navigation-logo'
 						>
-							<IoIosPlanet />
+							<IoIosPlanet size='2em' />
 							Planetbnb
 						</NavLink>
 					</li>
@@ -34,7 +34,7 @@ function Navigation({ isLoaded }) {
 								onClick={handleClick}
 								className='create-spot-btn'
 							>
-								Create a spot
+								Create a new spot
 							</button>
 						) : (
 							''

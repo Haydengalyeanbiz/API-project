@@ -12,22 +12,22 @@ module.exports = {
 		await SpotImage.bulkCreate(
 			[
 				{
-					spotId: 1,
+					spotId: 20,
 					url: '/images/mars/marshome1/bathroom.jpg',
 					preview: false,
 				},
 				{
-					spotId: 1,
+					spotId: 20,
 					url: '/images/mars/marshome1/gym.jpg',
 					preview: false,
 				},
 				{
-					spotId: 1,
+					spotId: 20,
 					url: '/images/mars/marshome1/hallway.jpg',
 					preview: false,
 				},
 				{
-					spotId: 1,
+					spotId: 20,
 					url: '/images/mars/marshome1/kitchen.jpg',
 					preview: false,
 				},

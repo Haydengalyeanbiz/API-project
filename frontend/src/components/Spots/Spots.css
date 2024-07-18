@@ -1,15 +1,26 @@
 @import url('../../index.css');
-
 .spots-wrapper {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	padding: 0 1rem 0 1.2rem;
+	grid-template-columns: repeat(4, minmax(200px, 1fr));
+	grid-template-rows: auto;
+	box-sizing: border-box;
+	justify-items: center;
 	gap: 1.5rem;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1rem 4rem;
+	/* display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem; */
 }
 
 .spot-div-structure {
+	max-width: 300px;
+	box-sizing: border-box;
 	position: relative;
-	width: 300px;
+	/* width: 300px; */
 	cursor: pointer;
 }
 

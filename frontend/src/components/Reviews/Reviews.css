@@ -11,6 +11,7 @@
 	flex-direction: column;
 	gap: 1rem;
 	border: solid 2px var(--deepSpaceAccent-clr);
+	background-color: var(--lightSpaceAccent-clr);
 	border-radius: 14px;
 	padding: 0.5rem 1rem;
 }
@@ -45,6 +46,25 @@
 }
 
 .add-review-btn:hover {
+	color: var(--deepSpaceAccent-clr);
+	background-color: var(--white-clr);
+	box-shadow: 2px 2px 10px var(--deepSpaceAccent-clr),
+		-2px -2px 10px var(--lightSpaceAccent-clr);
+	background-color: var(--white-clr);
+}
+
+.delete-review-btn {
+	max-width: fit-content;
+	padding: 0.3rem 2rem;
+	background-color: var(--deepSpaceAccent-clr);
+	color: var(--white-clr);
+	box-shadow: 4px 2px 10px var(--lightSpaceAccent-clr);
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+	border-radius: 14px;
+}
+
+.delete-review-btn:hover {
 	color: var(--deepSpaceAccent-clr);
 	background-color: var(--white-clr);
 	box-shadow: 2px 2px 10px var(--deepSpaceAccent-clr),

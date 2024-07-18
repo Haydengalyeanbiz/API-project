@@ -13,7 +13,7 @@ module.exports = {
 			[
 				{
 					spotId: 1,
-					url: '/images/mars/mars1.jpg',
+					url: '/images/moon/moonroom5.jpg',
 					preview: true,
 				},
 				{
@@ -108,7 +108,7 @@ module.exports = {
 				},
 				{
 					spotId: 20,
-					url: '/images/moon/moonroom5.jpg',
+					url: '/images/mars/mars1.jpg',
 					preview: true,
 				},
 			],

@@ -11,19 +11,24 @@ export const SpotDetails = () => {
 	const { spotId } = useParams();
 	const dispatch = useDispatch();
 	const spot = useSelector((state) => state.spots.spotDetails[spotId]);
-	const spotDetails = {};
+	const reviews = useSelector((state) => state.reviews.reviews);
 
 	// fetch call for getting the spotId
 	useEffect(() => {
 		dispatch(getSpotDetails(spotId));
 	}, [dispatch, spotId]);
 
+	// Re-fetch spot details whenever reviews change
+	useEffect(() => {
+		dispatch(getSpotDetails(spotId));
+	}, [dispatch, spotId, reviews]);
+
 	// checking to see if spot exists
 	if (!spot) {
 		return <div>Loading...</div>;
 	}
-
-	// conditionals for seeing # of reviews
+	// checking the length of reviews
+	const spotDetails = {};
 	if (spot.numReviews === 1) {
 		spotDetails.numReviews = 'Review';
 	} else if (spot.numReviews >= 2) {

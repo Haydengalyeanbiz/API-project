@@ -1,0 +1,14 @@
+@import url('../../index.css');
+
+.review-title-form {
+	font-size: var(--fs-medium);
+}
+
+.review-textarea {
+	min-width: 300px;
+	max-width: 300px;
+}
+
+.stars-label {
+	width: fit-content;
+}

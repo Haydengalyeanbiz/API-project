@@ -20,20 +20,6 @@ module.exports = {
 		await Spot.bulkCreate(
 			[
 				{
-					ownerId: 1,
-					address: 'Galactic Avenue 1',
-					city: 'Mars City',
-					state: 'Mars',
-					country: 'Mars Planet',
-					lat: 18.5,
-					lng: 77.3,
-					name: 'Red Planet Retreat',
-					description: 'A cozy retreat with Martian views.',
-					price: 300.0,
-					createdAt: new Date(),
-					updatedAt: new Date(),
-				},
-				{
 					ownerId: 2,
 					address: 'Lunar Base 2',
 					city: 'Luna',
@@ -296,6 +282,21 @@ module.exports = {
 					name: 'Astro Abode',
 					description: 'A comfortable abode in the stars.',
 					price: 380.0,
+					createdAt: new Date(),
+					updatedAt: new Date(),
+				},
+				{
+					ownerId: 1,
+					address: 'Galactic Avenue 1',
+					city: 'Mars City',
+					state: 'Mars',
+					country: 'Mars Planet',
+					lat: 18.5,
+					lng: 77.3,
+					name: 'Red Planet Retreat',
+					description:
+						"Welcome to Mars Oasis, your ultimate getaway on the Red Planet! Nestled in the serene Vallis Marineris canyon system, our luxurious dome offers an unparalleled Martian experience. Imagine waking up to the breathtaking sight of the planet's iconic rusty landscape stretching as far as the eye can see. Our state-of-the-art dome features a spacious living area with panoramic windows, providing a stunning view of the two moons, Phobos and Deimos, dancing in the sky.",
+					price: 300.0,
 					createdAt: new Date(),
 					updatedAt: new Date(),
 				},

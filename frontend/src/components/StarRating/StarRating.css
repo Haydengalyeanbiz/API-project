@@ -1,0 +1,16 @@
+.star-rating {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.star {
+	cursor: pointer;
+	transition: color 200ms;
+}
+
+.star-rating input {
+	color: var(--deepSpaceAccent-clr);
+	display: none;
+}

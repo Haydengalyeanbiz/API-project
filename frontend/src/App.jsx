@@ -10,6 +10,8 @@ import Navigation from './components/Navigation/Navigation';
 import { Spots } from './components/Spots/Spots';
 import { SpotDetails } from './components/SpotDetails/SpotDetails';
 import { CreateSpot } from './components/CreateSpot/CreateSpot';
+import { ManageSpots } from './components/ManageSpots/ManageSpots';
+import { UpdateSpot } from './components/UpdateSpot/UpdateSpot';
 
 function Layout() {
 	const dispatch = useDispatch();
@@ -39,12 +41,20 @@ const router = createBrowserRouter([
 				element: <Spots />,
 			},
 			{
-				path: '/spots/:spotId', // Add this route for spot details
+				path: '/spots/:spotId',
 				element: <SpotDetails />,
 			},
 			{
-				path: '/spots/new', // Add this route for spot details
+				path: '/spots/new',
 				element: <CreateSpot />,
+			},
+			{
+				path: '/spots/current',
+				element: <ManageSpots />,
+			},
+			{
+				path: '/spots/:spotId/edit',
+				element: <UpdateSpot />,
 			},
 		],
 	},

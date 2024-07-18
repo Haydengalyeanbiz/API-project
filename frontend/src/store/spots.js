@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 //constant actions
 const ADD_SPOT = 'spots/ADD_SPOT';
+const ADD_SPOT_IMAGE = 'spots/ADD_SPOT_IMAGE';
 const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS';
 const GET_SPOT_DETAILS = 'spots/GET_SPOT_DETAILS';
 const SET_USER_SPOTS = 'spots/SET_USER_SPOTS';
@@ -35,6 +36,12 @@ export const addSpot = (spot) => {
 		payload: spot,
 	};
 };
+
+// ADD SPOT IMAGE
+const addSpotImage = (image) => ({
+	type: ADD_SPOT_IMAGE,
+	image,
+});
 
 // UPDATE A SPOT
 const updateSpot = (spot) => ({
@@ -93,6 +100,23 @@ export const addANewSpot = (spot) => async (dispatch) => {
 	} else {
 		const error = await response.json();
 		throw error;
+	}
+};
+
+// ADD SPOT IMAGE
+export const addImageToSpot = (spotId, image) => async (dispatch) => {
+	const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(image),
+	});
+
+	if (response.ok) {
+		const newImage = await response.json();
+		dispatch(addSpotImage(newImage));
+		return newImage;
 	}
 };
 
@@ -155,6 +179,15 @@ const spotsReducer = (state = initialState, action) => {
 					[action.payload.id]: action.payload,
 				},
 			};
+			return newState;
+		}
+		case ADD_SPOT_IMAGE: {
+			const newState = { ...state };
+			const spot = newState.spotDetails[action.image.spotId];
+			if (spot) {
+				spot.images = spot.images || [];
+				spot.images.push(action.image);
+			}
 			return newState;
 		}
 		case SET_USER_SPOTS: {

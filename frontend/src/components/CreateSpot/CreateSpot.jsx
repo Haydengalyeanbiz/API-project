@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addANewSpot } from '../../store/spots';
+import { addImageToSpot } from '../../store/spots';
 import './CreateSpot.css';
 
 export const CreateSpot = () => {
@@ -60,17 +61,22 @@ export const CreateSpot = () => {
 			description: formData.description,
 			name: formData.title,
 			price: formData.price,
-			images: [
-				formData.image1,
-				formData.image2,
-				formData.image3,
-				formData.image4,
-				formData.image5,
-			].filter((url) => url),
 		};
 
 		const newSpot = await dispatch(addANewSpot(spot));
 		if (newSpot) {
+			const images = [
+				{ url: formData.image1, preview: true },
+				{ url: formData.image2, preview: false },
+				{ url: formData.image3, preview: false },
+				{ url: formData.image4, preview: false },
+				{ url: formData.image5, preview: false },
+			].filter((image) => image.url);
+
+			await Promise.all(
+				images.map((image) => dispatch(addImageToSpot(newSpot.id, image)))
+			);
+
 			navigate(`/spots/${newSpot.id}`);
 		}
 	};

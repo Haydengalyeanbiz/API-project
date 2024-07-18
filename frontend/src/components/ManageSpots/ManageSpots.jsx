@@ -1,7 +1,7 @@
 import './ManageSpots.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getUserSpots, deleteASpot } from '../../store/spots';
 import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfrimDeleteModal';
 import { useModal } from '../../context/Modal';
@@ -44,12 +44,12 @@ export const ManageSpots = () => {
 				</div>
 				<div className='no-spots'>
 					<p>No spots posted yet.</p>
-					<Link
+					<button
 						to='/spots/new'
-						className='create-spot-link'
+						className='create-newspot-btn no-spot-btn'
 					>
 						Create a New Spot
-					</Link>
+					</button>
 				</div>
 			</div>
 		);

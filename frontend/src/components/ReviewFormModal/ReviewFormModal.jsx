@@ -45,8 +45,6 @@ export const ReviewFormModal = ({ spotId }) => {
 					<StarRating
 						rating={stars}
 						setRating={setStars}
-						filledColor='#050c9c'
-						emptyColor='#ff0000'
 					/>
 					<span>Stars</span>
 				</label>

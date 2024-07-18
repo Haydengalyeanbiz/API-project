@@ -18,6 +18,8 @@ module.exports = {
 					hashedPassword: bcrypt.hashSync('password'),
 					firstName: 'Demo1',
 					lastName: 'User1',
+					createdAt: new Date(),
+					updatedAt: new Date(),
 				},
 				{
 					username: 'lunar_explorer',
@@ -75,7 +77,16 @@ module.exports = {
 		return queryInterface.bulkDelete(
 			options,
 			{
-				username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] },
+				username: {
+					[Op.in]: [
+						'Demo-lition',
+						'lunar_explorer',
+						'mars_marauder',
+						'stellar_navigator',
+						'galactic_pioneer',
+						'cosmic_voyager',
+					],
+				},
 			},
 			{}
 		);

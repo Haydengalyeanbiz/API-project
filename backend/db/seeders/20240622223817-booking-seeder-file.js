@@ -14,8 +14,8 @@ module.exports = {
 				{
 					userId: 1,
 					spotId: 1,
-					startDate: new Date('2024-07-20'),
-					endDate: new Date('2024-07-27'),
+					startDate: new Date('2027-07-20'),
+					endDate: new Date('2027-07-27'),
 				},
 				{
 					userId: 2,
